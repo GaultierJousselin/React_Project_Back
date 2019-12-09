@@ -5,9 +5,17 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var measuresRouter = require('./routes/measure');
+var sensorsRouter = require('./routes/sensor');
+var usersRouter = require('./routes/user');
 
 var app = express();
+
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +28,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/measures', measuresRouter);
+app.use('/sensors', sensorsRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
