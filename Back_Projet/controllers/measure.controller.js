@@ -135,3 +135,58 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+// Retrieve and return the number of Humidity measures.
+exports.findnumHumi = (req, res) => {
+  Measure.countDocuments({type: "humidity"})
+    .then(numHumidity => {
+      if (!numHumidity) {
+        return res.status(404).send({
+          message: 'Error finding the number of sensors'
+        });
+      }
+      res.send({numHumidity});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving number of sensors.'
+      });
+    });
+};
+
+
+// Retrieve and return the number of Temperature measures.
+exports.findnumTemp = (req, res) => {
+  Measure.countDocuments({type: "temperature"})
+    .then(numTemperature => {
+      if (!numTemperature) {
+        return res.status(404).send({
+          message: 'Error finding the number of sensors'
+        });
+      }
+      res.send({numTemperature});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving number of sensors.'
+      });
+    });
+};
+
+// Retrieve and return the number of AirPollution measures.
+exports.findnumAirP = (req, res) => {
+  Measure.countDocuments({type: "airPollution"})
+    .then(numAirP => {
+      if (!numAirP) {
+        return res.status(404).send({
+          message: 'Error finding the number of sensors'
+        });
+      }
+      res.send({numAirP});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving number of sensors.'
+      });
+    });
+};

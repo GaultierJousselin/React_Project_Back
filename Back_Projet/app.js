@@ -11,8 +11,10 @@ mongoose.connect(config.url, { useNewUrlParser: true });
 const app = express();
 
 var indexRouter = require('./routes/index');
-var measuresRouter = require('./routes/measure');
-var sensorsRouter = require('./routes/sensor');
+var measureRouter = require('./routes/measure');
+var measuresRouter = require('./routes/measures');
+var sensorRouter = require('./routes/sensor');
+var sensorsRouter = require('./routes/sensors');
 var usersRouter = require('./routes/user');
 
 app.use(function(req, res, next) {
@@ -32,7 +34,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/measure', measureRouter);
 app.use('/measures', measuresRouter);
+app.use('/sensor', sensorRouter);
 app.use('/sensors', sensorsRouter);
 app.use('/users', usersRouter);
 

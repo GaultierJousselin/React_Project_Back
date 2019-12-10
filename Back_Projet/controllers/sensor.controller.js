@@ -133,3 +133,21 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+// Retrieve and return all Sensors from the database.
+exports.findNumberSensors = (req, res) => {
+  Sensor.estimatedDocumentCount()
+    .then(numSensors => {
+      if (!numSensors) {
+        return res.status(404).send({
+          message: 'Error finding the number of sensors'
+        });
+      }
+      res.send({numSensors});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving number of sensors.'
+      });
+    });
+};
