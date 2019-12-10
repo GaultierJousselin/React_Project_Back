@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
         required: true
     },
     personsInHouse: {
-        type: int,
+        type: Number,
         required: true
     },
     houseSize: {
@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema(
         required: true
     }
   },
+  {
+    collection: 'User'
+  }
 );
 
 module.exports = mongoose.model('User', userSchema);

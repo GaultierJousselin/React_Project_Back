@@ -3,13 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+const config = require('./config/database.config');
+
+// on se connecte à la base de données
+mongoose.connect(config.url, { useNewUrlParser: true });
+const app = express();
 
 var indexRouter = require('./routes/index');
 var measuresRouter = require('./routes/measure');
 var sensorsRouter = require('./routes/sensor');
 var usersRouter = require('./routes/user');
-
-var app = express();
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');

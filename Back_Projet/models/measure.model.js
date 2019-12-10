@@ -15,10 +15,13 @@ const measureSchema = new mongoose.Schema(
         required: true
     },
     value: {
-        type: int,
+        type: Number,
         required: true
     }
   },
+  {
+    collection: 'Measure'
+  }
 );
 
 module.exports = mongoose.model('measure', measureSchema);
