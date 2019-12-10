@@ -1,4 +1,5 @@
 const User = require('../models/user.model.js');
+const _ = require('lodash')
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -11,10 +12,8 @@ exports.create = (req, res) => {
     });
   }
 
-  const id = _.uniqueId();
   // Create a new User
   const user = new User({
-    _id: id,
     location: req.body.location,
     personsInHouse: req.body.personsInHouse,
     houseSize: req.body.houseSize || ''
@@ -25,7 +24,7 @@ exports.create = (req, res) => {
     .save()
     .then(data => {
       // we wait for insertion to be complete and we send the newly user integrated
-      res.send(data);
+      res.redirect('http://localhost:3000/Formulaire');
     })
     .catch(err => {
       // In case of error during insertion of a new user in database we send an
@@ -34,6 +33,7 @@ exports.create = (req, res) => {
         message: err.message || 'Some error occurred while creating the User.'
       });
     });
+    
 };
 
 // Retrieve and return all Users from the database.
@@ -134,4 +134,21 @@ exports.delete = (req, res) => {
     });
 };
 
+// Retrieve and return the number of Users per country.
+exports.findNumCountry = (req, res) => {
+  User.countDocuments({location: req.params.country})
+    .then(numCountry => {
+      if (!numCountry) {
+        return res.status(404).send({
+          message: 'Error finding the number of sensors'
+        });
+      }
+      res.send({ [req.params.country]: numCountry });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred while retrieving number of sensors.'
+      });
+    });
+};
 

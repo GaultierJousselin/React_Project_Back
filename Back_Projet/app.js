@@ -15,7 +15,7 @@ var measureRouter = require('./routes/measure');
 var measuresRouter = require('./routes/measures');
 var sensorRouter = require('./routes/sensor');
 var sensorsRouter = require('./routes/sensors');
-var usersRouter = require('./routes/user');
+var userRouter = require('./routes/user');
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -38,7 +38,7 @@ app.use('/measure', measureRouter);
 app.use('/measures', measuresRouter);
 app.use('/sensor', sensorRouter);
 app.use('/sensors', sensorsRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
