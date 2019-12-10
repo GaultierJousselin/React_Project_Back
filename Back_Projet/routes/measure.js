@@ -3,6 +3,9 @@ const router = express.Router();
 
 var _ = require('lodash');
 
+// we import our measure controller
+var measure = require('../controllers/measure.controller');
+
 let measures = []
 
 

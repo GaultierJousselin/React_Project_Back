@@ -3,6 +3,9 @@ const router = express.Router();
 
 var _ = require('lodash');
 
+// we import our sensor controller
+var sensor = require('../controllers/sensor.controller');
+
 let sensors = []
 
 
